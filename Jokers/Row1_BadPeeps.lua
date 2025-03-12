@@ -196,6 +196,5 @@ local alvin = {
     end
 }
 return {
-    name = "BAD PEEPS Jokers",
     list = {dumbo,frank,trumbo,cube,alvin}
 }

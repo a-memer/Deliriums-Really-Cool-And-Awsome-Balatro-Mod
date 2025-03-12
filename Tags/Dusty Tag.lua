@@ -31,6 +31,5 @@ local dustyTag = {
 
 
 return {
-name = 'Dusty Tag',
 list = {dustyTag}   
 }

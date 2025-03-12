@@ -89,8 +89,8 @@ local dave = {
     end,
     loc_txt = {
         name = 'TurntechGodhead',
-        text = {'This joker has {C:mult}+#1#{} mult for ',
-        'every {C:money}1${} below {C:money}0${} you are',
+        text = {'This joker gains {C:mult}+#1#{} mult for ',
+        'every {C:money}1${} in {C:attention}debt{} you are',
         '{C:inactive}(Currently {C:mult}#3##2#{C:inactive} Mult){}'}
     },
     rarity = 1,
@@ -135,8 +135,9 @@ local friendInsideMe = {
     name = 'FriendInsideMe',
     loc_txt = {
         name = 'Friend Inside Me.',
-        text = {'Jokers sold in shops are +{C:attention}25%{}',
-                'more likely to be {C:dark_edition}Negative{}'}
+        text = {'{C:attention}Jokers{} sold in the shop ',
+                'are {C:green}+25%{} more likely',
+                'to be {C:dark_edition}Negative{}'}
     },
     blueprint_compat = false,
     atlas = 'mod-jokers',
@@ -174,7 +175,7 @@ local spamtonvaluenetwork = {
         text = {
             'This gains {X:mult,C:white}X#1#{} Mult for ',
             'every {C:attention}Rental{} Joker you own,',
-            'Jokers sold in shops are {C:attention}+15%{}', 
+            'Jokers sold in shops are {C:green}+15%{}', 
             'more likely to be {C:attention}Rental{}',
             "{C:inactive}(Currently {X:mult,C:white}X#2#{}{C:inactive} Mult)"}
     },
@@ -219,6 +220,5 @@ local spamtonvaluenetwork = {
 
 
 return {
-    name = 'Row 3',
     list = {spamtonvaluenetwork,chicken,skyghost,dave,friendInsideMe}
 }

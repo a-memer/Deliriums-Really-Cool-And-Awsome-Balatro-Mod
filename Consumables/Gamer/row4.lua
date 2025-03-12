@@ -520,6 +520,5 @@ local stitchedCard = {
 
 
 return {
-    name = 'Row 1',
     list = {wheel,factory,printingerror,stitchedCard,vintagecard}
 }

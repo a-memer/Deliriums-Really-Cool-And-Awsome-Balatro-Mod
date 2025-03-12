@@ -210,6 +210,5 @@ local rareCoin = {
 }
 
 return {
-    name = 'Row 1',
     list = {rareCoin,draw2,defence,rockknight,determination}
 }

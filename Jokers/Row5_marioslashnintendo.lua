@@ -49,7 +49,7 @@ local evilmario3joker = {
     loc_txt = {
             name = 'Sketchy Game',
             text = {"Whenever a played {C:attention}3{} scores,",
-                    "Destroy it and give this {X:mult,C:white}X#1#{} Mult",
+                    "{C:attention}Destroy{} it and give this {X:mult,C:white}X#1#{} Mult",
                     "{C:inactive}(Currently {X:mult,C:white}X#2#{}{C:inactive} Mult)"}
     },
     loc_vars = function(self, info_queue, card)
@@ -375,7 +375,7 @@ local invitation = {
     loc_txt = {
         name = 'Invitation',
         text = {'After {C:attention}4{} rounds, sell this card to',
-                'create a {C:dark_edition}negative {C:red}Rare{} Joker',
+                'create a {C:dark_edition}Negative {C:red}Rare{} Joker',
                 '{C:inactive}Currently {C:attention}#1#{C:inactive}/4)'}
     },
     eternal_compat = false,
@@ -464,6 +464,5 @@ local candycornvampire = {
 }
 
 return {
-    name = 'Row 3',
     list = {mario3joker,evilmario3joker,cartridge,invitation,candycornvampire}
 }

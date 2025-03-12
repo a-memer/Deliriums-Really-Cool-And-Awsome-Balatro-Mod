@@ -265,6 +265,5 @@ local brokenjoker = {
 
 
 return {
-    name = 'Row 8',
     list = {gaster,notposting,missingJoker,gamzee,middlefinger,brokenjoker}
 }

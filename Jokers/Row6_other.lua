@@ -4,7 +4,8 @@ local happyhenry = {
     loc_txt = {
         name = ':Joker',
         text = {"When {C:attention}Blind{} is selected,",
-                "Create a copy of this with a random {C:dark_edition}Edition{}",
+                "Create a copy of this",
+                'with a random {C:dark_edition}Edition{}',
                 '{C:inactive}(Must have room)'}
     },
     rarity = 2,
@@ -111,10 +112,13 @@ local codependence = {
 local gregory = {
     key = 'gregory',
     name = 'gregory',
+    loc_vars = function(self,info_queue,card)
+        info_queue[#info_queue+1] = G.P_CENTERS['c_fool']
+    end,
     loc_txt = {
         name = 'In Memoriam',
-        text = {'Whenever a joker is sold or ',
-                'destroyed create a {C:tarot}Fool{} card.',
+        text = {'Whenever a joker is {C:attention}sold{} or ',
+                '{C:attention}destroyed{} create a {C:tarot}Fool{} card.',
                 '{C:inactive}Must have room{}'}
     },
     rarity = 1,

@@ -87,9 +87,9 @@ local thisguy = {
     name = 'ThisGuy',
     loc_txt = {
         name = 'This Guy',
-        text = {'When {C:attention}Blind{} is selected,',
-        "{C:attention}destroy{} a random Joker and give triple",
-        "it's {C:money}Sell Price{}."}
+        text = {'When {C:attention}Blind{} is selected, {C:attention}Destroys{}',
+        "a random {C:attention}Joker{} and",
+        "gives triple it's {C:money}Sell Price{}."}
     },
     atlas = 'mod-jokers',
     pos = {x = 3, y = 2},
@@ -460,6 +460,5 @@ local softwork = {
 }
 
 return {
-    name = "JQFC Jokers",
     list = {jo_e,rocky,thisguy,Shrodo,softwork}
 }

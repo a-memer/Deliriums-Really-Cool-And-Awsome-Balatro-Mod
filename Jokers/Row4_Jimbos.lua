@@ -94,8 +94,8 @@ local expose = {
     loc_txt = {
         name = 'Exposé',
         text = {'{X:mult,C:white}X#1#{} Mult',
-                'A Random Joker is disabled on',
-                'the start of every Blind.'}
+                'A random {C:attention}Joker{} is {C:red}Disabled{} on',
+                'the start of every {C:attention}Blind{}.'}
     },
     atlas = 'mod-jokers',
     pos = {x=2,y=4},
@@ -201,6 +201,5 @@ local clearance = {
 }
 
 return {
-    name = 'Row 3',
     list = {quarterjoker,msJoker,expose,beastyJoker,clearance}
 }

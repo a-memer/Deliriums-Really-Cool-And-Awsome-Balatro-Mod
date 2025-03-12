@@ -210,6 +210,5 @@ local offbrand = {
 }
 
 return {
-    name = 'Row 1',
     list = {ai,briefcase,punchcard,royalty,offbrand}
 }

@@ -32,7 +32,6 @@ local armageddonTag = {
 
 
 return {
-name = 'Armageddon Tag',
 list = {armageddonTag}   
 }
 

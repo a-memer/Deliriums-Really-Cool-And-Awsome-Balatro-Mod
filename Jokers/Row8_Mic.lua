@@ -57,8 +57,9 @@ local stopSign = {
     name = 'Stop Sign',
     loc_txt = {
         name = 'Stop Sign',
-        text = {'When a hand is played, the joker',
-                'to the right of this is {C:attention}debuffed.'}
+        text = {'When a hand is played,',
+                '{C:red}Debuff{} the {C:attention}Joker{} to',
+                'the right of this'}
     },
     atlas = 'mod-jokers',
     pos = {x = 4, y = 5},
@@ -211,6 +212,5 @@ local ron = {
 }
 
 return {
-    name = 'Row 8',
     list = {crosswalk,stopSign,noshow,mysterysucker,ron}
 }

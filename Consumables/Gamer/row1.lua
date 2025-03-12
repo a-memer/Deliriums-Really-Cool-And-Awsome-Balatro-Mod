@@ -244,6 +244,5 @@ local pinkSlip = {
 
 
 return {
-    name = 'Row 1',
     list = {intrusive,amputation,pyramid,pinkSlip,speedrun}
 }

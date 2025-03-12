@@ -3,8 +3,9 @@ local timothy = {
     name = 'timothy_TBD',
     loc_txt = {
         name = 'Timothy',
-        text = {'Joker cards sold in shops are',
-        'replaced with {C:spectral}Spectral{} cards.'}
+        text = {'{C:attention}Joker{} cards sold the shop',
+        'are replaced with',
+        '{C:spectral}Spectral{} cards.'}
     },
     rarity = 1,
     cost = 5,
@@ -132,9 +133,9 @@ local babycat = {
     end, 
     loc_txt = {
         name = 'Baby Cat',
-        text = {'This Joker gives {X:money,C:white}X#1#{} Dollars',
-                'Every {C:attention}15{} Hands played.',
-                '{C:inactive}(Currently #2# hands left)'}
+        text = {'{X:money,C:white}X#1#{} Dollars every',
+                '{C:attention} 15{} Hands played.',
+                '{C:inactive}#2# hands left'}
     },
     rarity = 2,
     atlas = 'mod-jokers',
@@ -205,6 +206,5 @@ local mirrorguy = {
 
 
 return {
-    name = 'Row 3',
     list = {timothy,Violet,johnny,babycat,mirrorguy}
 }

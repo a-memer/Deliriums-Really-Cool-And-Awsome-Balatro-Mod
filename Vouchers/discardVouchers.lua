@@ -38,6 +38,5 @@ local Prostetic = {
 
 
 return {
-    name = 'Vouchers',
     list = {blackMarket,Prostetic}
 }
