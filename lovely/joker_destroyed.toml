@@ -1,0 +1,52 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "function Card:remove_from_deck(from_debuff)"
+position = "after"
+payload = '''
+if self.ability.set == 'Joker' and not from_debuff and self.added_to_deck then
+    SMODS.calculate_context({other_card = self, joker_destroyed = true})
+end
+'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/button_callbacks.lua"
+pattern = "G.FUNCS.check_for_buy_space = function(card)"
+position = "after"
+payload = '''
+SMODS.calculate_context({checking_buy_space = true, checking_card = card, card_type = card.ability.set})
+'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/button_callbacks.lua"
+pattern = "if e.config.ref_table.ability.set ~= 'Joker' or (e.config.ref_table.edition and e.config.ref_table.edition.negative) or #G.jokers.cards < G.jokers.config.card_limit then"
+position = "at"
+payload = '''
+if e.config.ref_table.ability.set ~= 'Joker' or (e.config.ref_table.edition and e.config.ref_table.edition.negative) or #G.jokers.cards < G.jokers.config.card_limit or next(SMODS.find_card('j_deliriumcoolmod_roastchicken')) then
+'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "function Card:add_to_deck(from_debuff)"
+position = "after"
+payload = '''
+if self.ability.set == 'Joker' then
+    SMODS.calculate_context({joker_added = true, added_joker = self})
+end
+'''
+match_indent = true
+times = 1

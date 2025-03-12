@@ -1,0 +1,47 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+
+
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "return self.base.id"
+position = "at"
+payload = '''
+    return self.base.id or 10
+'''
+match_indent = true
+times = 1
+
+
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/utils.lua"]'
+pattern = "for _, card in ipairs(context.cardarea.cards) do"
+position = "after"
+payload = '''
+card.base.value = card.base.value or '10'
+card.base.suit = card.base.suit or 'Spades'
+'''
+match_indent = true
+times = 1
+
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "if not _c.generate_ui or type(_c.generate_ui) ~= 'function' then"
+position = "before"
+payload = '''
+if card == nil then
+    return false
+end
+'''
+match_indent = true
+times = 1
+
+

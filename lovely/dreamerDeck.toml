@@ -1,0 +1,55 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = "cardarea.lua"
+pattern = "self.config.highlighted_limit = config.highlight_limit or 5"
+position = "after"
+payload = '''
+self.config.highlighted_limit = config.highlight_limit or math.max(G.GAME.starting_params.cards_per_discard,G.GAME.starting_params.cards_per_hand,5)'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "back.lua"
+pattern = "if self.effect.config.hand_size then"
+position = "before"
+payload = '''
+if self.effect.config.cards_per_hand then
+    G.GAME.starting_params.cards_per_hand = G.GAME.starting_params.cards_per_hand + self.effect.config.cards_per_hand
+end
+if self.effect.config.cards_per_discard then
+    G.GAME.starting_params.cards_per_discard = G.GAME.starting_params.cards_per_discard + self.effect.config.cards_per_discard
+end
+'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/misc_functions.lua"
+pattern = "hands = 4,"
+position = "after"
+payload = '''
+cards_per_hand = 5,
+cards_per_discard = 5,
+'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/button_callbacks.lua"
+pattern = "if #G.hand.highlighted <= 0 or G.GAME.blind.block_play or #G.hand.highlighted > 5 then"
+position = "at"
+payload = '''
+if #G.hand.highlighted <= 0 or G.GAME.blind.block_play or #G.hand.highlighted > G.GAME.starting_params.cards_per_hand then
+'''
+match_indent = true
+times = 1
+
+
+

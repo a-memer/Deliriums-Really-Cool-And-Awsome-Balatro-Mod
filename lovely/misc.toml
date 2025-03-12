@@ -1,0 +1,114 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+
+
+[[patches]]
+[patches.pattern]
+target = "functions/misc_functions.lua"
+pattern = "if card.config.center.set == 'Tarot' or card.config.center.set == 'Planet' then "
+position = "before"
+payload = '''
+if card.config.center.set == 'Gamer' then 
+    G.E_MANAGER:add_event(Event({
+      trigger = 'immediate',
+      func = function()
+        G.E_MANAGER:add_event(Event({
+          trigger = 'immediate',
+          func = function()
+            G.GAME.last_gamer = card.config.center_key
+              return true
+          end
+        }))
+          return true
+      end
+    }))
+  end
+'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "last_tarot_planet = nil,"
+position = "before"
+payload = '''
+last_gamer = nil,
+'''
+match_indent = true
+times = 1
+
+
+# PROJECT SKYBOX
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "function get_new_boss()"
+position = "after"
+payload = '''
+if next(SMODS.find_card('j_deliriumcoolmod_skyghost')) then
+  local all_bosses = {}
+  for k, v in pairs(G.P_BLINDS) do
+    all_bosses[k] = true
+  end
+  local _, boss = pseudorandom_element(all_bosses, pseudoseed('boss'))
+  return boss
+end 
+'''
+match_indent = true
+times = 1
+
+
+[[patches]]
+[patches.regex]
+target = "functions/state_events.lua"
+pattern = '''(?<indent>[\t ]*)                        if G\.GAME\.round_resets\.blind == G\.P_BLINDS\.bl_small then\n                            G\.GAME\.round_resets.blind_states\.Small = 'Defeated''''
+position = "at"
+line_prepend = '$indent'
+payload = '''
+if G.GAME.round_resets.blind_states.Small == 'Current' then
+  G.GAME.round_resets.blind_states.Small = 'Defeated'
+'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.regex]
+target = "functions/state_events.lua"
+pattern = '''(?<indent>[\t ]*)                        elseif G\.GAME\.round_resets\.blind == G\.P_BLINDS\.bl_big then\n                            G\.GAME\.round_resets.blind_states\.Big = 'Defeated''''
+position = "at"
+line_prepend = '$indent'
+payload = '''
+elseif G.GAME.round_resets.blind_states.Big == 'Current' then
+  G.GAME.round_resets.blind_states.Big = 'Defeated'
+'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''if G.GAME.blind:get_type() == 'Boss' then'''
+position = "at"
+payload = '''
+if G.GAME.round_resets.blind_states.Boss == 'Current' then
+'''
+match_indent = true
+times = 2
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''delay(0.4); ease_ante(1); delay(0.4); check_for_unlock({type = 'ante_up', ante = G.GAME.round_resets.ante + 1})'''
+position = "before"
+payload = '''
+G.GAME.round_resets.blind_states.Boss = 'Defeated'
+'''
+match_indent = true
+times = 1
+
+
+                    

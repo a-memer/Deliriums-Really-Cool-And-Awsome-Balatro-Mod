@@ -1,0 +1,59 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "G.GAME.spectral_rate = G.GAME.spectral_rate or 0"
+position = "after"
+payload = '''
+local forced_joker = nil
+for j = 1, #G.jokers.cards do
+    if not forced_joker then
+        forced_joker = G.jokers.cards[j]:calculate_joker({store_joker_create = true, shop_card = card, area = area, debugstring = 'Apple'})
+    if forced_joker then
+        for j = 1, #G.jokers.cards do
+            if G.jokers.cards[j]:calculate_joker({store_joker_modify = true, shop_card = forced_joker, debugstring = 'Cherry'}) then break end
+        end
+        return forced_joker end
+    end
+end
+'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.regex]
+target = "functions/UI_definitions.lua"
+pattern = '''(?<indent>[\t ]*)                    for k, v in ipairs\(G\.GAME\.tags\) do'''
+position = "before"
+line_prepend = '$indent'
+payload = '''
+for j = 1, #G.jokers.cards do
+    if G.jokers.cards[j]:calculate_joker({store_joker_modify = true, shop_card = card, debugstring = 'Banana'}) then break end
+end
+'''
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "for _kk, vvv in ipairs(G.GAME.tags) do"
+position = "before"
+payload = '''
+for j = 1, #G.jokers.cards do
+    if G.jokers.cards[j]:calculate_joker({store_joker_modify = true, shop_card = v, debugstring = 'Kiwi'}) then break end
+end
+'''
+match_indent = true
+times = 1
+
+
+
+
+
+
+

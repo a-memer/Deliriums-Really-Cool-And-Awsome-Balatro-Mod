@@ -1,0 +1,30 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "if polled_rate > check_rate and polled_rate <= check_rate + v.val then"
+position = "after"
+payload = '''
+if next(find_joker('timothy_TBD')) and v.type == 'Joker' then
+    v.type = 'Spectral'
+end
+'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if (self.ability.set == 'Planet' or (self.ability.set == 'Booster' and self.ability.name:find('Celestial'))) and #find_joker('Astronomer') > 0 then self.cost = 0 end"
+position = "after"
+payload = '''
+if (self.ability.set == 'Spectral' or (self.ability.set == 'Booster' and self.ability.name:find('Spectral'))) and #find_joker('Violet_TBD') > 0 then self.cost = 0 end
+'''
+match_indent = true
+times = 1
+
+
+

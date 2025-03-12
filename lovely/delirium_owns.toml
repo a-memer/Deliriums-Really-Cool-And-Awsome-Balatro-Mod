@@ -1,0 +1,164 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "self.cost = 0"
+position = "after"
+payload = '''
+self.nickname = nil
+self.font = G.LANG.font 
+self.glitched_pos = nil
+'''
+match_indent = true
+times = 1
+
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "return generate_card_ui(self.config.center, nil, loc_vars, card_type, badges, hide_desc, main_start, main_end, self)"
+position = "at"
+payload = '''
+    local UI = generate_card_ui(self.config.center, nil, loc_vars, card_type, badges, hide_desc, main_start, main_end, self,self.nickname,self.font)
+    return UI
+'''
+match_indent = true
+times = 1
+
+
+[[patches]]
+[patches.pattern]
+target = 'functions/common_events.lua'
+pattern = 'function generate_card_ui(_c, full_UI_table, specific_vars, card_type, badges, hide_desc, main_start, main_end, card)'
+position = 'at'
+match_indent = true
+payload = '''function generate_card_ui(_c, full_UI_table, specific_vars, card_type, badges, hide_desc, main_start, main_end, card, nickname, font)'''
+
+
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "full_UI_table.name = localize{type = 'name', set = _c.set, key = _c.key, nodes = full_UI_table.name}"
+position = "at"
+payload = '''
+if not _c.generate_ui or type(_c.generate_ui) ~= 'function' or nickname ~= nil then
+    if nickname ~= nil then
+        local fixed_nickname = {}
+
+        fixed_nickname[#nickname+1] = {n=G.UIT.O, config={
+        object = DynaText({string = {nickname},
+            colours = {G.C.UI.TEXT_LIGHT},
+            bump = true,
+            silent = true,
+            pop_in = 0,
+            pop_in_rate = 4,
+            maxw = 5,
+            shadow = true,
+            y_offset = -0.6,
+            spacing = math.max(0, 0.32*(17 - #nickname)),
+            scale =  (0.55 - 0.004*#nickname)*(1),
+            font = font})}}
+        full_UI_table.name = fixed_nickname
+    else
+	    full_UI_table.name = localize{type = 'name', set = _c.set, key = _c.key, nodes = full_UI_table.name, font = card.font}
+    end
+end
+'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/misc_functions.lua"
+pattern = "object = DynaText({string = {assembled_string},"
+position = "after"
+payload = '''
+font = args.font or G.LANG.font,
+'''
+match_indent = true
+times = 1
+
+
+[[patches]]
+[patches.pattern]
+target = "functions/misc_functions.lua"
+pattern = "spacing = math.max(0, 0.32*(17 - #assembled_string)),"
+position = "after"
+payload = '''
+font = args.font,
+'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/misc_functions.lua"
+pattern = "spacing = math.max(0, 0.32*(17 - #assembled_string)),"
+position = "after"
+payload = '''
+font = args.font,
+'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "function Card:update_alert()"
+position = "before"
+payload = '''
+function Card:set_font(_font)
+    self.font = _font
+end
+
+function Card:set_nickname(nick_name)
+    self.nickname = nick_name
+end
+'''
+match_indent = true
+times = 1
+
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "seal = self.seal,"
+position = "before"
+payload = '''
+nickname = self.nickname,
+glitched_pos = self.glitched_pos,
+'''
+match_indent = true
+times = 1
+
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "self.seal = cardTable.seal"
+position = "before"
+payload = '''
+self.nickname = cardTable.nickname
+self.glitched_pos = cardTable.glitched_pos
+'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "self.children.center:set_sprite_pos(_center.pos)"
+position = "at"
+payload = '''
+if self.glitched_pos then
+    self.children.center:set_sprite_pos(self.glitched_pos)
+else
+    self.children.center:set_sprite_pos(_center.pos)
+end
+'''
+match_indent = true
+times = 1

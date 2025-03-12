@@ -1,0 +1,16 @@
+{
+	"id": "deliriumcoolmod",
+	"name": "Delirium's Really Cool And Awesome Balatro Mod",
+	"display_name": "DRCAABM",
+	"author": ["Delirium Softworks"],
+	"description": "NOTE: Mod May or May Not Be Really Cool And Awesome.",
+	"prefix": "deliriumcoolmod",
+	"main_file": "main.lua",
+	"priority": 0,
+	"badge_colour": "FFD1D1",
+	"badge_text_colour": "000000",
+	"version": "0.6.9",
+	"dependencies": [
+		"Steamodded (>=1.0.0~ALPHA-1216a)"
+	]
+}

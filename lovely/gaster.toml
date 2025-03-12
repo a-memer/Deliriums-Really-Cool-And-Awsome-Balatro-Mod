@@ -1,0 +1,32 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "local card = create_card(v.type, area, nil, nil, nil, nil, nil, 'sho')"
+position = "after"
+payload = '''
+if card.config.center.key == 'j_deliriumcoolmod_gaster' then
+    card:remove()
+    card = SMODS.create_card({set = 'Joker', key ='j_joker'})
+end
+'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''card = create_card("Joker", G.pack_cards, nil, nil, true, true, nil, 'buf')'''
+position = "after"
+payload = '''
+if card.config.center.key == 'j_deliriumcoolmod_gaster' then
+    card:remove()
+    card = SMODS.create_card({set = 'Joker', key ='j_joker'})
+end
+'''
+match_indent = true
+times = 1
