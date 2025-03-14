@@ -1,4 +1,4 @@
-# Delirum's Really Cool And Awesome Balatro Mod
+# ![alt text](https://github.com/a-memer/Deliriums-Really-Cool-And-Awsome-Balatro-Mod/blob/main/gh_assets/modlogo.png?raw=true)
 
 
 - **45+** Jokers
