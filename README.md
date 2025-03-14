@@ -9,4 +9,4 @@
 
 
 
-What are you waiting for? Download it, it's free!
+What are you waiting for? Download it, it's ![alt text](https://github.com/a-memer/Deliriums-Really-Cool-And-Awsome-Balatro-Mod/blob/main/gh_assets/free.gif?raw=true)!
