@@ -8,8 +8,8 @@ local dumbo = {
     end,   
     loc_txt = {
         name = 'Dumbo',
-        text = {'Whenever a {C:attention}non-king{} scores,',
-                'destroy it and gain {C:chips}+#1#{} chips.',
+        text = {'Whenever a {C:attention}Non-King{} card scores,',
+                '{C:attention}destroy{} it and give this {C:chips}+#1#{} chips.',
                 '{C:inactive}(Currently {C:chips}+#2# {C:inactive}chips)'}
     },
     rarity = 3,
@@ -47,8 +47,8 @@ local frank = {
     end,
     loc_txt = {
         name = 'Frank',
-        text = {'Whenever a {C:attention}number card{} scores,',
-                'destroy it and gain {C:money}$#1#{}.',}
+        text = {'Whenever a {C:attention}Number Card{} scores,',
+                '{C:attention}destroy{} it and earn {C:money}$#1#{}',}
     },
     rarity = 3,
     pos = {x = 2, y = 1},
@@ -78,8 +78,8 @@ local trumbo = {
     end,       
     loc_txt = {
         name = 'Trumbo',
-        text = {'Whenever a {C:attention}non-ace{} scores,',
-                'destroy it and gain {C:mult}+#1#{} Mult.',
+        text = {'Whenever a {C:attention}Non-Ace{} card scores,',
+                '{C:attention}destroy{} it and gain {C:mult}+#1#{} Mult.',
                 '{C:inactive}(Currently {C:mult}+#2# {C:inactive}Mult)'}},
     rarity = 3,
     cost = 9,
@@ -166,8 +166,8 @@ local alvin = {
     end,   
     loc_txt = {
         name = 'Anti-Alias Alvin',
-        text = {'Whenever a {C:attention}non-number card{} scores,',
-                'destroy it and gain {X:mult,C:white}X#1#{} mult.',
+        text = {'Whenever a {C:attention}Non-Number card{} scores,',
+                '{C:attention}destroy{} it and give this {X:mult,C:white}X#1#{} mult.',
                 '{C:inactive}(Currently {X:mult,C:white}X#2# {C:inactive} Mult)'}
     },
     rarity = 3,

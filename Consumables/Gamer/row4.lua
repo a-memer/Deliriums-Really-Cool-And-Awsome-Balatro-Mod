@@ -2,12 +2,13 @@ local wheel = {
     key = 'wheelofpain',
     config = {extra = 6},
     loc_vars = function(self,info_queue,card)
+        info_queue[#info_queue+1] = G.P_CENTERS['e_negative']
         return {vars = {G.GAME.probabilities.normal, card.ability.extra}}
     end,
     loc_txt = {
         name = 'Wheel Of Pain',
-        text = {'{C:green}#1# in #2#{} chance to add {C:dark_edition}Negative',
-                'edition to a random {C:attention}Joker{}'}
+        text = {'{C:green}#1# in #2#{} chance to add',
+                '{C:dark_edition}Negative to a random {C:attention}Joker{}'}
     },
     set = 'Gamer',
     pos = {x=0,y=2},

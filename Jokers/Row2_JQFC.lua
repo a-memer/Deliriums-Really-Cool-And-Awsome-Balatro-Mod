@@ -134,7 +134,7 @@ local Shrodo = {
     cost = 10,
     calculate = function(self,card,context) 
         if context.destroying_card and (G.GAME.current_round.hands_left < roundNumber(G.GAME.round_resets.hands / 2,0)) then
-            return true
+            return {remove = true}
         end
 
         if context.joker_main and (G.GAME.current_round.hands_left >= roundNumber(G.GAME.round_resets.hands / 2,0)) then

@@ -10,8 +10,8 @@ pattern = "local card = create_card(v.type, area, nil, nil, nil, nil, nil, 'sho'
 position = "after"
 payload = '''
 if card.config.center.key == 'j_deliriumcoolmod_gaster' then
-    card:remove()
-    card = SMODS.create_card({set = 'Joker', key ='j_joker'})
+    card.config.center = G.P_CENTERS['j_joker']
+    card:set_ability(card.config.center)
 end
 '''
 match_indent = true
@@ -24,9 +24,10 @@ pattern = '''card = create_card("Joker", G.pack_cards, nil, nil, true, true, nil
 position = "after"
 payload = '''
 if card.config.center.key == 'j_deliriumcoolmod_gaster' then
-    card:remove()
-    card = SMODS.create_card({set = 'Joker', key ='j_joker'})
+    card.config.center = G.P_CENTERS['j_joker']
+    card:set_ability(card.config.center)
 end
 '''
 match_indent = true
 times = 1
+

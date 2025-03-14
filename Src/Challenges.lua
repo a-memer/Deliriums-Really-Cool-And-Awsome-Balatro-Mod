@@ -21,7 +21,9 @@ SMODS.Challenge {
         {id = 'j_deliriumcoolmod_happyhenry', eternal = true, edition = 'negative'}
     },
     rules = {
-        modifiers = {dollars = 100}
+        modifiers = {
+            {id = 'dollars', value = 100}
+        }    
     },
     unlocked = function(self)
         return true

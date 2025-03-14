@@ -19,10 +19,10 @@ pattern = "if self.effect.config.hand_size then"
 position = "before"
 payload = '''
 if self.effect.config.cards_per_hand then
-    G.GAME.starting_params.cards_per_hand = G.GAME.starting_params.cards_per_hand + self.effect.config.cards_per_hand
+    G.GAME.starting_params.cards_per_hand = self.effect.config.cards_per_hand
 end
 if self.effect.config.cards_per_discard then
-    G.GAME.starting_params.cards_per_discard = G.GAME.starting_params.cards_per_discard + self.effect.config.cards_per_discard
+    G.GAME.starting_params.cards_per_discard = self.effect.config.cards_per_discard
 end
 '''
 match_indent = true

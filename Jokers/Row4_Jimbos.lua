@@ -197,6 +197,9 @@ local clearance = {
                 }
             end
         end
+    end,
+    draw = function(self,card,layer)
+        card.children.center:draw_shader('booster', nil, card.ARGS.send_to_shader)
     end
 }
 

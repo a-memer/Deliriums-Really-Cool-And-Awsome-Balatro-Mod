@@ -173,6 +173,8 @@ local determination = {
         end}))
         G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.1,func = function()
             chosenJoker:remove_from_deck()
+            chosenJoker.T.w = G.CARD_W
+            chosenJoker.T.h = G.CARD_H
             chosenJoker.config.center = G.P_CENTERS['j_mr_bones']
             chosenJoker:set_ability(chosenJoker.config.center,true)
             chosenJoker:add_to_deck()

@@ -3,6 +3,7 @@ local chicken = {
     name = 'roastchicken',
     config = {extra = 5},
     loc_vars = function(self,info_queue,card)
+        info_queue[#info_queue+1] = G.P_CENTERS['e_negative']
         return {vars = {card.ability.extra}}
     end,
     loc_txt = {
@@ -133,6 +134,9 @@ local skyghost = {
 local friendInsideMe = {
     key = 'FriendInsideMe',
     name = 'FriendInsideMe',
+    loc_vars = function(self,info_queue,card)
+        info_queue[#info_queue+1] = G.P_CENTERS['e_negative']
+    end,
     loc_txt = {
         name = 'Friend Inside Me.',
         text = {'{C:attention}Jokers{} sold in the shop ',

@@ -3,9 +3,8 @@ local blackMarket = {
     config = {extra = {currentamount = 0}},
     loc_txt = {
         name = 'Black Market',
-        text = {'Earn an extra {C:money}$1{} at the end of the round',
-                'for every unused {C:red}Discard{} at',
-                'the end of the round.'
+        text = {'Earn {C:money}$1{} per unused',
+                '{C:attention}discard{} at end of round'
         }
     },
     pos = {x=0,y=0},
@@ -21,8 +20,8 @@ local Prostetic = {
     key = 'prostetic',
     loc_txt = {
         name = 'Prostetic',
-        text = {'You may select {C:attention}one more card{}',
-                'while {C:red}Disarding{}.'}
+        text = {'You may select an {C:attention}additional{}',
+                'card while {C:attention}disarding{}'}
     },
     pos = {x=0,y=1},
     atlas = 'mod-vouchers',

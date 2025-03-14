@@ -370,6 +370,7 @@ local invitation = {
     name = 'invitation',
     config = {extra = 0},
     loc_vars = function(self,info_queue,card)
+        info_queue[#info_queue+1] = G.P_CENTERS['e_negative']
         return {vars = {card.ability.extra}}
     end,
     loc_txt = {

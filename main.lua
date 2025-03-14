@@ -122,7 +122,7 @@ local dreamerDeck = SMODS.Back {
         text = {'You may play',
             '{C:attention}6 cards{} per hand'}
     },
-    config = {cards_per_hand = 1},
+    config = {cards_per_hand = 6, cards_per_discard = 6},
     atlas = 'mod-decks',
     pos = {x = 0,y = 0},
     unlocked = true
@@ -147,7 +147,7 @@ SMODS.Booster {
     key = 'gamerBooster1',
     config = {extra = 3, choose = 1},
     loc_vars = function(self,info_queue,card)
-        return {vars = {card.ability.extra, card.ability.choose}}
+        return {vars = {card.ability.choose, card.ability.extra}}
     end,
     loc_txt = {
         name = 'Gamer Pack',
@@ -190,7 +190,7 @@ SMODS.Booster {
     key = 'gamerBooster2',
     config = {extra = 3, choose = 1},
     loc_vars = function(self,info_queue,card)
-        return {vars = {card.ability.extra, card.ability.choose}}
+        return {vars = {card.ability.choose, card.ability.extra}}
     end,
     loc_txt = {
         name = 'Gamer Pack',
@@ -228,7 +228,7 @@ SMODS.Booster {
     key = 'gamerBoosterJumbo',
     config = {extra = 4, choose = 1},
     loc_vars = function(self,info_queue,card)
-        return {vars = {card.ability.extra, card.ability.choose}}
+        return {vars = {card.ability.choose, card.ability.extra}}
     end,
     loc_txt = {
         name = 'Jumbo Gamer Pack',
@@ -267,7 +267,7 @@ SMODS.Booster {
     key = 'gamerBoosterMega',
     config = {extra = 4, choose = 2},
     loc_vars = function(self,info_queue,card)
-        return {vars = {card.ability.extra, card.ability.choose}}
+        return {vars = {card.ability.choose, card.ability.extra}}
     end,
     loc_txt = {
         name = 'Mega Gamer Pack',
