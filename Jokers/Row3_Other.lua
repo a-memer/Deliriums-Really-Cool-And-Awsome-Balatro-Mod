@@ -183,6 +183,7 @@ local mirrorguy = {
     rarity = 1,
     atlas = 'mod-jokers',
     pos = {x = 4, y = 6},
+    blueprint_compat = true,
     calculate = function(self,card,context)
         if context.wheel_used and not context.blueprint then
             if context.successful then

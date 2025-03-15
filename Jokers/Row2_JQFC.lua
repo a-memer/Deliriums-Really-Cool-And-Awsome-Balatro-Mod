@@ -52,8 +52,9 @@ local rocky = {
     pos = {x=2, y=2},
     rarity = 2,
     cost = 7,
+    blueprint_compat = true,
     calculate = function(self,card,context)
-        if context.individual and context.cardarea == G.play then
+        if context.individual and context.cardarea == G.play and not context.blueprint then
             if context.other_card.ability.effect == 'Stone Card' then
                 card.ability.extra.gained_x_chips = card.ability.extra.gained_x_chips + card.ability.extra.x_chips
                 return {
