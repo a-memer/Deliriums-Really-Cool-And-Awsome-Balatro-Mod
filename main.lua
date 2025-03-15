@@ -162,21 +162,20 @@ SMODS.Booster {
     kind = 'gamer',
     weight = 0.5,
     create_card = function(self,card,i)
-        local card = SMODS.create_card({set = "Gamer", area = G.pack_cards, skip_materialize = true, soulable = true, key_append = "gam"})
-        local onestars = {'c_deliriumcoolmod_intrusivethought','c_deliriumcoolmod_amputation','c_deliriumcoolmod_pyamidscheme',
-        'c_deliriumcoolmod_speedrun','c_deliriumcoolmod_pinkSlip'}
+        if i == 1 or G.GAME.gamer_choices == nil then
+            G.GAME.gamer_choices = {}
+        end
+        
+        local qualityControl = false
         for v=1, #G.vouchers.cards do
             local lekey = G.vouchers.cards[v].config.center.key
             if lekey == 'v_deliriumcoolmod_qualitycontrol' then
-                while tableContains(onestars,card.config.center.key) do
-                    card:remove()
-                    card = SMODS.create_card({set = "Gamer", area = G.pack_cards, skip_materialize = true, soulable = true, key_append = "gam"})
-                end
-                break
+                qualityControl = true
             end
         end
-            
 
+        local key = get_gamer_for_pack(qualityControl)
+        local card = SMODS.create_card({set = "Gamer", area = G.pack_cards, key = key, skip_materialize = true, soulable = true, key_append = "gam"})
         return card
     end
 }
@@ -205,21 +204,20 @@ SMODS.Booster {
     draw_hand = true,
     weight = 0.5,
     create_card = function(self,card,i)
-        local card = SMODS.create_card({set = "Gamer", area = G.pack_cards, skip_materialize = true, soulable = true, key_append = "gam"})
-        local onestars = {'c_deliriumcoolmod_intrusivethought','c_deliriumcoolmod_amputation','c_deliriumcoolmod_pyamidscheme',
-        'c_deliriumcoolmod_speedrun','c_deliriumcoolmod_pinkSlip'}
+        if i == 1 or G.GAME.gamer_choices == nil then
+            G.GAME.gamer_choices = {}
+        end
+        
+        local qualityControl = false
         for v=1, #G.vouchers.cards do
             local lekey = G.vouchers.cards[v].config.center.key
             if lekey == 'v_deliriumcoolmod_qualitycontrol' then
-                while tableContains(onestars,card.config.center.key) do
-                    card:remove()
-                    card = SMODS.create_card({set = "Gamer", area = G.pack_cards, skip_materialize = true, soulable = true, key_append = "gam"})
-                end
-                break
+                qualityControl = true
             end
         end
-            
 
+        local key = get_gamer_for_pack(qualityControl)
+        local card = SMODS.create_card({set = "Gamer", area = G.pack_cards, key = key, skip_materialize = true, soulable = true, key_append = "gam"})
         return card
     end
 }
@@ -244,21 +242,20 @@ SMODS.Booster {
     weight = 0.3,
     cost = 6,
     create_card = function(self,card,i)
-        local card = SMODS.create_card({set = "Gamer", area = G.pack_cards, skip_materialize = true, soulable = true, key_append = "gam"})
-        local onestars = {'c_deliriumcoolmod_intrusivethought','c_deliriumcoolmod_amputation','c_deliriumcoolmod_pyamidscheme',
-        'c_deliriumcoolmod_speedrun','c_deliriumcoolmod_pinkSlip'}
+        if i == 1 or G.GAME.gamer_choices == nil then
+            G.GAME.gamer_choices = {}
+        end
+        
+        local qualityControl = false
         for v=1, #G.vouchers.cards do
             local lekey = G.vouchers.cards[v].config.center.key
             if lekey == 'v_deliriumcoolmod_qualitycontrol' then
-                while tableContains(onestars,card.config.center.key) do
-                    card:remove()
-                    card = SMODS.create_card({set = "Gamer", area = G.pack_cards, skip_materialize = true, soulable = true, key_append = "gam"})
-                end
-                break
+                qualityControl = true
             end
         end
-            
 
+        local key = get_gamer_for_pack(qualityControl)
+        local card = SMODS.create_card({set = "Gamer", area = G.pack_cards, key = key, skip_materialize = true, soulable = true, key_append = "gam"})
         return card
     end
 }
@@ -283,21 +280,20 @@ SMODS.Booster {
     weight = 0.25,
     cost = 6,
     create_card = function(self,card,i)
-        local card = SMODS.create_card({set = "Gamer", area = G.pack_cards, skip_materialize = true, soulable = true, key_append = "gam"})
-        local onestars = {'c_deliriumcoolmod_intrusivethought','c_deliriumcoolmod_amputation','c_deliriumcoolmod_pyamidscheme',
-        'c_deliriumcoolmod_speedrun','c_deliriumcoolmod_pinkSlip'}
+        if i == 1 or G.GAME.gamer_choices == nil then
+            G.GAME.gamer_choices = {}
+        end
+        
+        local qualityControl = false
         for v=1, #G.vouchers.cards do
             local lekey = G.vouchers.cards[v].config.center.key
             if lekey == 'v_deliriumcoolmod_qualitycontrol' then
-                while tableContains(onestars,card.config.center.key) do
-                    card:remove()
-                    card = SMODS.create_card({set = "Gamer", area = G.pack_cards, skip_materialize = true, soulable = true, key_append = "gam"})
-                end
-                break
+                qualityControl = true
             end
         end
-            
 
+        local key = get_gamer_for_pack(qualityControl)
+        local card = SMODS.create_card({set = "Gamer", area = G.pack_cards, key = key, skip_materialize = true, soulable = true, key_append = "gam"})
         return card
     end
 }

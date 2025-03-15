@@ -208,8 +208,9 @@ local soak = SMODS.PokerHand {
     visible = false,
     evaluate = function(parts, hand)        
         local _6 = get_X_same(6, hand, true)
-            
-        if #_6 then
+        local asdf = SMODS.merge_lists(_6)
+        
+        if next(_6) then
             return {asdf}
         end
     end

@@ -131,3 +131,94 @@ function change_hand_select_size(handmod,disardmod)
     G.hand.config.highlighted_limit = math.max(G.GAME.starting_params.cards_per_discard,G.GAME.starting_params.cards_per_hand)
 
 end
+
+
+function shuffle(t,seed)
+    local tbl = {}
+    for i = 1, #t do
+        tbl[i] = t[i]
+    end
+    for i = #tbl, 2, -1 do
+        local j = pseudorandom(seed,1,i)
+        tbl[i], tbl[j] = tbl[j], tbl[i]
+    end
+    return tbl
+end
+
+
+
+function get_gamer_for_pack(no_one_stars)
+    local pool = {
+        {key = 'ai',weight = 0.1,onestar = false},
+        {key = 'breifCase',weight = 0.15,onestar = false},
+        {key = 'royalty',weight = 0.2,onestar = false},
+        {key = 'punchcard',weight = 0.1,onestar = false},
+        {key = 'selfdefence',weight = 0.25,onestar = false},
+        {key = 'offbrand',weight = 0.3,onestar = false},
+        {key = 'draw2',weight = 0.4,onestar = false},
+        {key = 'rockknight',weight = 0.85,onestar = false},
+        {key = 'determination',weight = 0.85,onestar = false},
+        {key = 'rareCoin',weight = 0.5,onestar = false},
+        {key = 'wheelofpain',weight = 0.6,onestar = false},
+        {key = 'factorytemplate',weight = 0.6,onestar = false},        
+        {key = 'printingerror', weight = 0.6, onestar = false},
+        {key = 'stitchedCard', weight = 0.7, onestar = true},
+        {key = 'missingposter',weight = 0.95,onestar = false}
+    }
+
+    if not no_one_stars then
+        table.insert(pool,{key = 'intrusivethought', weight = 0,onestar = true})
+        table.insert(pool,{key = 'amputation', weight = 0,onestar = true})
+        table.insert(pool,{key = 'pyamidscheme', weight = 0,onestar = true})
+        table.insert(pool,{key = 'speedrun', weight = 0,onestar = true})
+        table.insert(pool,{key = 'pinkSlip', weight = 0,onestar = true})
+        table.insert(pool,{key = 'vintagecard', weight =  0.75,onestar = true})
+
+    end
+
+    if not next(find_joker("Showman")) then
+        for i = #pool, 1, -1 do 
+            local entry = pool[i]
+            if tableContains(G.GAME.gamer_choices,'c_deliriumcoolmod_' .. pool[i].key) then
+                table.remove(pool, i)
+            else
+                local conKeys = {}
+                for j=1, #G.consumeables.cards do
+                    table.insert(conKeys,G.consumeables.cards[j].config.center.key)
+                end
+                if tableContains(conKeys,'c_deliriumcoolmod_' .. pool[i].key) then
+                    table.remove(pool, i)
+                end
+            end
+        end
+    end
+
+
+
+
+    local poolLuck = pseudorandom('gamerPack')
+    local lowestWeight = 1
+
+
+    for i=1, #pool do
+        if pool[i].weight < lowestWeight then
+            lowestWeight = pool[i].weight
+        end
+    end
+    poolLuck = math.max(poolLuck,lowestWeight + pseudorandom('gamerPack',0.01,0.1))
+
+
+
+
+    local shuffledPool = shuffle(pool,'gamerPack')
+
+    for i=1, #shuffledPool do
+        if shuffledPool[i].weight < poolLuck then
+            table.insert(G.GAME.gamer_choices,'c_deliriumcoolmod_' .. shuffledPool[i].key)
+            return 'c_deliriumcoolmod_' .. shuffledPool[i].key
+        end
+    end
+
+    return 'c_deliriumcoolmod_ai'
+end
+            
