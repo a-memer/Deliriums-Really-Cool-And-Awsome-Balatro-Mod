@@ -21,12 +21,14 @@ local MissingPoster = {
         return false
     end,       
     in_pool = function(self,args)
-        for j=1, #G.jokers.cards do
-            if G.jokers.cards[j].ability.name == 'noshow' then
-                return true
+        if G.jokers and G.jokers.cards then
+           for j=1, #G.jokers.cards do
+                if G.jokers.cards[j].ability.name == 'noshow' then
+                    return true
+                end
             end
+            return false
         end
-        return false
     end,
     use = function(self,card,area,copier)
         local noShow = nil
