@@ -211,6 +211,45 @@ local rareCoin = {
     end
 }
 
+local golem = {
+    key = 'golem',
+    loc_txt = {
+        name = 'GOLEM',
+        text = {'Give a random joker ',
+                'a {C:red}GOLEM{} sticker'}
+    },
+    set = 'Gamer',
+    pos = {x=5,y=0},
+    cost = 5,
+    atlas = 'gamer-cards',
+    can_use = function(self,card)
+        for j=1, #G.jokers.cards do 
+            if not G.jokers.cards[j].ability.deliriumcoolmod_golem then
+                return true
+            end
+        end
+    end,
+    use = function(self,card,area,copier)
+        validJokers = {}
+        for j=1, #G.jokers.cards do
+            if not G.jokers.cards[j].ability.deliriumcoolmod_golem then
+                table.insert(validJokers,G.jokers.cards[j])
+            end
+        end
+        chosenJoker = pseudorandom_element(validJokers,pseudoseed('GOLEM'))
+        G.E_MANAGER:add_event(Event({
+            delay = 0.5, func = function() 
+                local sticker = SMODS.Stickers['deliriumcoolmod_golem']
+                sticker.apply(sticker,chosenJoker,true)                
+                chosenJoker:juice_up(0.5,0.5)
+                play_sound('tarot2', 1, 0.4)
+                return true
+            end
+        }))
+        delay(0.5)
+    end
+}
+
 return {
-    list = {rareCoin,draw2,defence,rockknight,determination}
+    list = {rareCoin,draw2,defence,rockknight,golem,determination}
 }

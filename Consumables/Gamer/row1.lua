@@ -242,7 +242,48 @@ local pinkSlip = {
     end
 }
 
+local looseClown = {
+    key = 'looseClown',
+    loc_vars = function(self,info_queue,card)
+        info_queue[#info_queue+1] = G.P_CENTERS['j_joker']
+        return {vars = {card.ability.extra}}
+    end,
+    loc_txt = {
+        name = 'Loose Clown',
+        text = {'{C:attention}Destroys{} all {C:attention}Jokers{},',
+                'Fills your empty {C:attention}',
+                'Joker slots{} with {C:attention}Joker{}s'}
+    },
+    set = 'Gamer',
+    pos = {x=6,y=0},
+    cost = 1,
+    atlas = 'gamer-cards',
+    can_use = function(self,card)
+        return true
+    end,
+    use = function(self,card,area,copier)
+        local jokersRemoved = 0
+        local _first_dissolve = false
+        for j=1, #G.jokers.cards do
+            if (not G.jokers.cards[j].ability.eternal) then G.jokers.cards[j]:start_dissolve(nil, _first_dissolve);_first_dissolve = true; jokersRemoved = jokersRemoved + 1 end
+        end
+        delay(0.2)
+        for j=1, G.jokers.config.card_limit - #G.jokers.cards + jokersRemoved do
+            G.E_MANAGER:add_event(Event({
+                delay = 0.5, func = function() 
+                    local _card = SMODS.add_card({set = 'Joker', key = 'j_joker'})
+                    _card:start_materialize()
+                    return true
+                end
+            }))
+        end
+        delay(0.5)
+    end
+}
+
+
+
 
 return {
-    list = {intrusive,amputation,pyramid,pinkSlip,speedrun}
+    list = {intrusive,amputation,pyramid,pinkSlip,looseClown,speedrun}
 }

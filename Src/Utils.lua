@@ -124,6 +124,61 @@ function corruptJoker(Card,chaos,pseudostring)
 
 end
 
+
+
+
+
+
+function increase_joker_values(Card,amount,allow_floats)
+    Card:remove_from_deck(true)
+    local stuff = {
+        'h_x_mult','x_mult','x_chips','h_x_chips','perma_x_chips','perma_x_mult','perma_h_x_chips','perma_h_x_mult'
+    }
+
+    for k,v in pairs(Card.ability) do
+        if type(v) == "number" and k ~= 'order' and k ~= 'type' and v > 0 then
+            if (tableContains(stuff,k) and v < 1) or (not tableContains(stuff,k)) then
+                if not allow_floats then
+                    if (k == 'h_size' or k == 'd_size' or k == 'h_plays') then
+                        Card.ability[k] = v + math.ceil(amount)
+                    else
+                        Card.ability[k] = v + amount
+                    end
+                else
+                    Card.ability[k] = v + amount
+                end
+            end
+        end
+    end
+
+    if type(Card.ability.extra) == "table" then
+        for k,v in pairs(Card.ability.extra) do
+            if k ~= 'poker_hand' then
+                if type(v) == "number"  and v > 0 then
+                    sendInfoMessage('Tarh')
+                    play_sound('gong')
+                    if not allow_floats then
+                        if (k == 'h_size' or k == 'd_size' or k == 'h_plays') then
+                            Card.ability.extra[k] = v + math.ceil(amount)
+                        else
+                            Card.ability.extra[k] = v + amount
+                        end
+                    else
+                        Card.ability.extra[k] = v + amount
+                    end
+                    Card.ability.extra[k] = math.max(Card.ability.extra[k],0.01)
+                end
+            end
+        end
+    elseif type(Card.ability.extra) == "number" then
+        Card.ability.extra = Card.ability.extra + amount
+    end
+
+
+    Card:add_to_deck(true)
+end
+
+
 function change_hand_select_size(handmod,disardmod)
     G.GAME.starting_params.cards_per_discard = G.GAME.starting_params.cards_per_hand + disardmod
     G.GAME.starting_params.cards_per_hand = G.GAME.starting_params.cards_per_hand + handmod
@@ -157,6 +212,7 @@ function get_gamer_for_pack(no_one_stars)
         {key = 'offbrand',weight = 0.3,onestar = false},
         {key = 'draw2',weight = 0.4,onestar = false},
         {key = 'rockknight',weight = 0.85,onestar = false},
+        {key = 'golem',weight = 0.85,onestar = false},
         {key = 'determination',weight = 0.85,onestar = false},
         {key = 'rareCoin',weight = 0.5,onestar = false},
         {key = 'wheelofpain',weight = 0.6,onestar = false},
@@ -173,6 +229,7 @@ function get_gamer_for_pack(no_one_stars)
         table.insert(pool,{key = 'speedrun', weight = 0,onestar = true})
         table.insert(pool,{key = 'pinkSlip', weight = 0,onestar = true})
         table.insert(pool,{key = 'vintagecard', weight =  0.75,onestar = true})
+        table.insert(pool,{key = 'looseClown', weight =  0.15,onestar = true})
 
     end
 

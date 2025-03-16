@@ -34,9 +34,9 @@ local quarterjoker = {
 local msJoker = {
     key = 'msJoker',
     name = 'MS Joker',
-    config = {extra = {x_mult = 0.75, hand_size = 5}},
+    config = {extra = {x_mult = 0.75, h_size = 5}},
     loc_vars = function(self,info_queue,card)
-        return {vars = {card.ability.extra.hand_size, card.ability.extra.x_mult}}
+        return {vars = {card.ability.extra.h_size, card.ability.extra.x_mult}}
     end,
     loc_txt = {
         name = 'MS Joker',
@@ -65,10 +65,10 @@ local msJoker = {
         end
     end,
     add_to_deck = function(self, card, from_debuff)
-        G.hand:change_size(card.ability.extra.hand_size)
+        G.hand:change_size(card.ability.extra.h_size)
     end,
     remove_from_deck = function(self, card, from_debuff)
-        G.hand:change_size(-card.ability.extra.hand_size)
+        G.hand:change_size(-card.ability.extra.h_size)
     end,
     set_ability = function(self, card, initial, delay_sprites)
         local dupeAmount = 0
@@ -80,7 +80,7 @@ local msJoker = {
             end
         end
         card.ability.extra.x_mult = card.ability.extra.x_mult - (0.05 * dupeAmount)
-        card.ability.extra.hand_size = card.ability.extra.hand_size + dupeAmount
+        card.ability.extra.h_size = card.ability.extra.h_size + dupeAmount
     end
 }
 
@@ -132,9 +132,9 @@ local expose = {
 local beastyJoker = {
     key = 'beastlyJoker',
     name = 'beastlyJoker',
-    config = {extra = {hand = 1, gainedHands = 0, handsLeft = 3}},
+    config = {extra = {hand = 1, h_plays = 0, handsLeft = 3}},
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.hand, card.ability.extra.gainedHands, card.ability.extra.handsLeft} }
+        return { vars = { card.ability.extra.hand, card.ability.extra.h_plays, card.ability.extra.handsLeft} }
     end, 
     loc_txt = {
         name = 'Beastly Joker',
@@ -154,13 +154,19 @@ local beastyJoker = {
                 card.ability.extra.handsLeft = card.ability.extra.handsLeft - 1
                 if card.ability.extra.handsLeft == 0 then
                     G.GAME.round_resets.hands = G.GAME.round_resets.hands + card.ability.extra.hand
-                    card.ability.extra.gainedHands = card.ability.extra.gainedHands + 1
+                    card.ability.extra.h_plays = card.ability.extra.h_plays + 1
                     card.ability.extra.handsLeft = 3
-                    card_eval_status_text(card, 'extra', nil, nil, nil, {message = "Sacrafices Made!"})
+                    card_eval_status_text(card, 'extra', nil, nil, nil, {message = "Sacrifices Made!"})
                 end
             end
         end
-    end
+    end,
+    remove_from_deck = function(self,card,from_debuff)
+        G.GAME.round_resets.hands = G.GAME.round_resets.hands - card.ability.extra.h_plays
+    end,
+    add_to_deck = function(self,card,from_debuff)
+        G.GAME.round_resets.hands = G.GAME.round_resets.hands + card.ability.extra.h_plays
+    end    
 }
 
 local clearance = {

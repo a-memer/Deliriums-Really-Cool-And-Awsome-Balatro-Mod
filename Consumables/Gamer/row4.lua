@@ -8,7 +8,7 @@ local wheel = {
     loc_txt = {
         name = 'Wheel Of Pain',
         text = {'{C:green}#1# in #2#{} chance to add',
-                '{C:dark_edition}Negative to a random {C:attention}Joker{}'}
+                '{C:dark_edition}Negative{} to a random {C:attention}Joker{}'}
     },
     set = 'Gamer',
     pos = {x=0,y=2},

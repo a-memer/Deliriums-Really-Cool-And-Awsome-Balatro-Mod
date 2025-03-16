@@ -24,12 +24,13 @@ SMODS.Atlas({key = "mod-tags",px = 34,py = 34,path = {['default'] = 'mod-tags.pn
 SMODS.Atlas({key = "mod-decks",px = 71,py = 95,path = {['default'] = 'mod-decks.png'}}):register()
 SMODS.Atlas({key = "mod-vouchers",px = 71,py = 95,path = {['default'] = 'mod-vouchers.png'}}):register()
 SMODS.Atlas({key = "mod-planets",px = 71,py = 95,path = {['default'] = 'mod-planets.png'}}):register()
+SMODS.Atlas({key = "mod-stickers",px = 71,py = 95,path = {['default'] = 'mod-stickers.png'}}):register()
 
 SMODS.ConsumableType {
     key = 'Gamer',
     primary_colour = HEX('FDBF51'),
     secondary_colour = HEX('FD7457'),
-    collection_rows = {5,5},
+    collection_rows = {6,5},
     loc_txt = {
         name = 'Gamer', -- used on card type badges
         collection = 'Gamer Cards', -- label for the button to access the collection
@@ -297,6 +298,53 @@ SMODS.Booster {
         return card
     end
 }
+
+
+SMODS.Sticker {
+    key = 'golem',
+    loc_txt = {
+        name = 'GOLEM',
+        text = {
+            "When {C:attention}Blind{} is selected,",
+            "destroy Joker to the right",
+            "and permanently add {C:attention}0.25",
+            "to this Joker's {C:attention}compatible{} values"
+        },
+        label = 'GOLEM'
+    },
+    badge_colour = HEX('A4615E'),
+    atlas = 'mod-stickers',
+    pos = {x=0,y=0},
+    calculate = function(self,card,context)
+        if context.setting_blind then
+            local my_pos = nil
+            for i = 1, #G.jokers.cards do
+                if G.jokers.cards[i] == card then my_pos = i; break end
+            end
+            if my_pos and G.jokers.cards[my_pos+1] and not card.getting_sliced and not G.jokers.cards[my_pos+1].ability.eternal and not G.jokers.cards[my_pos+1].getting_sliced then 
+                local sliced_card = G.jokers.cards[my_pos+1]
+                sliced_card.getting_sliced = true
+                G.GAME.joker_buffer = G.GAME.joker_buffer - 1
+                G.E_MANAGER:add_event(Event({func = function()
+                    G.GAME.joker_buffer = 0
+                    increase_joker_values(card,0.25,false)
+                    card:juice_up(0.8, 0.8)
+                    sliced_card:start_dissolve({HEX("57ecab")}, nil, 1.6)
+                    play_sound('slice1', 0.96+math.random()*0.08)
+                return true end }))
+                card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_upgrade_ex')})
+            end
+        end
+    end
+} 
+
+
+
+
+
+
+
+
 
 -- SMODS.Joker{
 --     key = 'frisk1',

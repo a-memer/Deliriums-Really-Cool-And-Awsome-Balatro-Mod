@@ -37,7 +37,7 @@ target = "functions/common_events.lua"
 pattern = "if not _c.generate_ui or type(_c.generate_ui) ~= 'function' then"
 position = "before"
 payload = '''
-if card == nil then
+if card == nil and not badges then
     return false
 end
 '''
