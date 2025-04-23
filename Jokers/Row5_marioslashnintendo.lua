@@ -107,6 +107,13 @@ local cartridge = {
         local Cardslots = {G.jokers, G.hand,G.consumeables}
         local funnytest = pseudorandom_element(Cardslots, pseudoseed('cartridge'))
 
+        if context.setting_blind and  pseudorandom('cartridge_create') < cchaos/300 then
+            G.hand:change_size(pseudorandom('cartridge',-5,5))
+            G.GAME.round_resets.hands = G.GAME.round_resets.hands + pseudorandom('cartridge',-5,5)
+            G.GAME.round_resets.discards = G.GAME.round_resets.discards + pseudorandom('cartridge',-5,5)
+            change_hand_select_size(pseudorandom('cartridge',-2,2),pseudorandom('cartridge',-2,2))
+        end
+
         -- This is after 30 hands!
         if cchaos > 7.5 then
             G.ROOM.jiggle = G.ROOM.jiggle + pseudorandom('cartridge_create',-1,1)
@@ -431,11 +438,6 @@ local candycornvampire = {
     calculate = function(self,card,context)
         if context.setting_blind and context.cardarea == G.jokers then
             local hasUpgraded = false
-
-            G.hand:change_size(pseudorandom('cartridge',-5,5))
-            G.GAME.round_resets.hands = G.GAME.round_resets.hands + pseudorandom('cartridge',-5,5)
-            G.GAME.round_resets.discards = G.GAME.round_resets.discards + pseudorandom('cartridge',-5,5)
-            change_hand_select_size(pseudorandom('cartridge',-2,2),pseudorandom('cartridge',-2,2))
 
             for j=1, #G.jokers.cards do
                 _card = G.jokers.cards[j]
